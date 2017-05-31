@@ -1,0 +1,60 @@
+.Title {
+	text-align: center;
+}
+
+.success {
+	color: green;
+	text-align: center;
+}
+
+.error {
+	color: red;
+	text-align: center;
+}
+
+.cassette {
+	margin: 0px auto;
+	display: block;
+	border-radius: 10%;
+	margin-bottom: 5px;
+}
+
+.text {
+	text-align: center;
+}
+
+#password {
+	margin: 0px auto;
+	display: block;
+	border-radius: 10%;
+	margin-top: 5px;
+}
+
+.login {
+	margin: 0px auto;
+	display: block;
+}
+
+#sign-up {
+	text-align: center;
+}
+
+#video {
+	transform: scaleX(-1);
+	display: block;
+	margin: 0 auto;
+}
+
+#canvas {
+	display: none;
+}
+
+#button {
+	display: block;
+	margin: 0 auto;
+}
+
+#image {
+	display: block;
+	margin: 0 auto;
+}
