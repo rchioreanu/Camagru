@@ -1,14 +1,23 @@
-// ************************************************************************** //
-//                                                                            //
-//                                                        :::      ::::::::   //
-//   webcam.js                                          :+:      :+:    :+:   //
-//                                                    +:+ +:+         +:+     //
-//   By: rchiorea <rchiorea@student.42.fr>          +#+  +:+       +#+        //
-//                                                +#+#+#+#+#+   +#+           //
-//   Created: 2017/05/23 16:28:23 by rchiorea          #+#    #+#             //
-//   Updated: 2017/05/23 19:07:58 by rchiorea         ###   ########.fr       //
-//                                                                            //
-// ************************************************************************** //
+
+function post(path, params, method) {
+    method = method || "post";
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+    document.body.appendChild(form);
+    form.submit();
+}
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -42,7 +51,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		context.translate(width, 0);
 		context.scale(-1, 1);
 		context.drawImage(video, 0, 0, width, height);
-		var img = canvas.toDataURL("image/bmp");
-		image.src = img;
+		var img = canvas.toDataURL("image/bmp")
+		post('upload.php', {
+			image: img
+		});
 	};
 })
