@@ -11,7 +11,7 @@ if (!isset($_SESSION['login_user']))
 
    <body>
 	  <h1>Welcome <?php echo $_SESSION['login_user'];?></h1>
-<canvas id = "canvas"></canvas>
+<canvas id = "canvas" width = 640 height = 480></canvas>
 <video id = "video" autoplay></video>
 <input id = "button" type = "button" value = "photo!" >
 <img id = "image">

@@ -88,5 +88,33 @@ class DataBase
 		}
 		return (FALSE);
 	}
+	public function	addImage($img)
+	{
+		$query = "INSERT INTO images (img) VALUES ('$img');";
+		try
+		{
+			$this->db->query($query);
+		}
+		catch (PDOException $e)
+		{
+			$e->getTrace();
+		}
+	}
+
+	public function	getImage($id)
+	{
+		$query = "SELECT * FROM `images` WHERE `id` LIKE '$id';";
+		try
+		{
+			foreach ($this->db->query($query) as $elem)
+			{
+				return ($elem['img']);
+			}
+		}
+		catch (PDOException $e)
+		{
+			$e->getTrace();
+		}
+	}
 }
 ?>

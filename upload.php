@@ -1,2 +1,10 @@
 <link rel = "stylesheet" type = "text/css" href = "style.css">
-<img id = "image" src = "<?php echo $_POST['image']; ?>">
+<?php
+require 'database.class.php';
+
+$database = new DataBase();
+$image = str_replace(' ', '+', $_POST['image']);
+$database->addImage($image);
+echo "<img id = 'image' src = '";
+echo $database->getImage(5);
+echo "'>";
