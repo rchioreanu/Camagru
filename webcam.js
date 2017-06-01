@@ -1,4 +1,3 @@
-
 function post(path, params, method) {
 	method = method || "post";
 	var form = document.createElement("form");
@@ -19,6 +18,19 @@ function post(path, params, method) {
 	form.submit();
 }
 
+function grayscale (ctx) {
+	for (let i = 0; i < 640; i++)
+		for (let j = 0; j < 480; j++) {
+			let tmp = ctx.getImageData(i, j, 1, 1);
+			let r = tmp.data[0];
+			let g = tmp.data[1];
+			let b = tmp.data[2];
+			let v = 0.2126*r + 0.7152*g + 0.0722*b;
+			tmp.data[0] = tmp.data[1] = tmp.data[2] = v;
+			ctx.putImageData(tmp, i, j);
+		}
+	return (ctx);
+}
 document.addEventListener("DOMContentLoaded", function () {
 
 	"use strict";

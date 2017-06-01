@@ -6,5 +6,5 @@ $database = new DataBase();
 $image = str_replace(' ', '+', $_POST['image']);
 $database->addImage($image);
 echo "<img id = 'image' src = '";
-echo $database->getImage(5);
+echo $database->getImage(8);
 echo "'>";
