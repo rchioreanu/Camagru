@@ -40,6 +40,10 @@
 }
 
 #video {
+	top: 0;
+	left: 0;
+	z-index: 0;
+	position: relative;
 	transform: scaleX(-1);
 	display: block;
 	margin: 0 auto;
@@ -57,4 +61,33 @@
 #image {
 	display: block;
 	margin: 0 auto;
+	top: 0;
+	left: 0;
+	z-index: 0;
 }
+
+#overlay {
+	display: block;
+	margin: 0 auto;
+	position: absolute;
+	top: 0;
+	left: 28%;
+	z-index: 1;
+}
+
+.div {
+	position: relative;
+}
+
+.center {
+	text-align: center;
+}
+ #list {
+	 display: inline-block;
+	 margin: 0 auto;
+ }
+
+ #refresh {
+	 display: inline-block;
+	 margin: 0 auto;
+ }
