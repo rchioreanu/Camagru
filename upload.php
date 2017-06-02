@@ -3,17 +3,16 @@
 require 'database.class.php';
 $database = new DataBase();
 $image = str_replace(' ', '+', $_POST['image']);
-$database->addImage($image);
 ?>
 <div class = "div">
 	<img id = 'image' src = <?php echo $image;?>>
-<img id = 'overlay' src = 'image/explore.png'>
+	<img id = 'overlay' src = 'image/<?php echo $_GET['filter'];?>.png'>
 </div>
 <?php
 $nobase64 = substr($image, 22);
 $decoded = base64_decode($nobase64);
 $img = imagecreatefromstring($decoded);
-$img2 = imagecreatefrompng('image/explore.png');
+$img2 = imagecreatefrompng("image/".$_GET['filter'].".png");
 imagealphablending($img2, true);
 imagealphablending($img, true);
 imagecopy($img, $img2, 0, 0, 0, 0, 640, 480);

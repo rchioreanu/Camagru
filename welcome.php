@@ -14,7 +14,7 @@ if (!isset($_SESSION['login_user']))
 <canvas id = "canvas" width = 640 height = 480></canvas>
 <div class = "div">
 <video id = "video" autoplay></video>
-<img id = "overlay" src = "image/explore.png">
+<img id = "overlay" src = "image/dragnea.png">
 </div>
 <div class = "center">
 <select id = "list">

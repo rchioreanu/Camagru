@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		var videoTracks = stream.getVideoTracks();
 		console.log('Got stream with constraints:', constraints);
 		console.log('Using video device: ' + videoTracks[0].label);
-		video.style.filter = 'grayscale(100%)';
 		stream.oninactive = function() {
 			console.log('Stream inactive');
 		};
@@ -56,7 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		context.scale(-1, 1);
 		context.drawImage(video, 0, 0);
 		var img = canvas.toDataURL("image/png");
-		post('upload.php', {
+		var sel = document.getElementById("list");
+		post('upload.php?filter=' + sel.options[sel.selectedIndex].value, {
 			image: img
 		});
 	};
