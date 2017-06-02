@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	var height = 480;
 	var select = document.getElementById('refresh');
 	var overlay = document.getElementById('overlay');
+	var hasWebcam = false;
 
 	function handleSuccess(stream) {
 		var videoTracks = stream.getVideoTracks();
@@ -40,24 +41,38 @@ document.addEventListener("DOMContentLoaded", function () {
 		};
 		window.stream = stream;
 		video.srcObject = stream;
+		hasWebcam = true;
+		overlay.src = "image/dragnea.png";
 	}
 	navigator.mediaDevices.getUserMedia(constraints).
-		then(handleSuccess);
-	select.onclick = function () {
-		var sel = document.getElementById("list");
-		overlay.src = "image/" + sel.options[sel.selectedIndex].value + ".png"
-	}
-	button.onclick = function() {
-		var context = canvas.getContext('2d');
-		canvas.width = 640;
-		canvas.height = 480;
-		context.translate(width, 0);
-		context.scale(-1, 1);
-		context.drawImage(video, 0, 0);
-		var img = canvas.toDataURL("image/png");
-		var sel = document.getElementById("list");
-		post('upload.php?filter=' + sel.options[sel.selectedIndex].value, {
-			image: img
+		then(handleSuccess, function () {
+			overlay.src = "";
+			button.style.display = 'none';
 		});
+	select.onclick = function () {
+		if (!hasWebcam) {
+			alert ("You can't do that, you don't have a webcam!");
+		}
+		else {
+			var sel = document.getElementById("list");
+			overlay.src = "image/" + sel.options[sel.selectedIndex].value + ".png"
+		}
+	}
+	button.onclick = function () {
+		if (hasWebcam) {
+			var context = canvas.getContext('2d');
+			canvas.width = 640;
+			canvas.height = 480;
+			context.translate(width, 0);
+			context.scale(-1, 1);
+			context.drawImage(video, 0, 0);
+			var img = canvas.toDataURL("image/png");
+			var sel = document.getElementById("list");
+			post('upload.php?filter=' + sel.options[sel.selectedIndex].value, {
+				image: img
+			});
+		}
+		else
+			alert ("NO WEBCAM");
 	};
 })
