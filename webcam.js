@@ -28,9 +28,11 @@ document.addEventListener("DOMContentLoaded", function () {
 	var image = document.getElementById('image');
 	var width = 640;
 	var height = 480;
-	var select = document.getElementById('refresh');
 	var overlay = document.getElementById('overlay');
 	var hasWebcam = false;
+	var sel = document.getElementById('list');
+	var upload = document.getElementById('uploadbtn');
+	var submit = document.getElementById('submitbtn');
 
 	function handleSuccess(stream) {
 		var videoTracks = stream.getVideoTracks();
@@ -46,17 +48,10 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 	navigator.mediaDevices.getUserMedia(constraints).
 		then(handleSuccess, function () {
-			overlay.src = "";
 			button.style.display = 'none';
 		});
-	select.onclick = function () {
-		if (!hasWebcam) {
-			alert ("You can't do that, you don't have a webcam!");
-		}
-		else {
-			var sel = document.getElementById("list");
+	sel.onchange = function () {
 			overlay.src = "image/" + sel.options[sel.selectedIndex].value + ".png"
-		}
 	}
 	button.onclick = function () {
 		if (hasWebcam) {
@@ -67,7 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			context.scale(-1, 1);
 			context.drawImage(video, 0, 0);
 			var img = canvas.toDataURL("image/png");
-			var sel = document.getElementById("list");
 			post('upload.php?filter=' + sel.options[sel.selectedIndex].value, {
 				image: img
 			});

@@ -71,23 +71,25 @@
 	margin: 0 auto;
 	position: absolute;
 	top: 0;
-	left: 28%;
+	left: 0;
 	z-index: 1;
 }
 
-.div {
-	position: relative;
+.line-btn {
+	display: inline-block;
+	margin: 0 auto;
 }
 
 .center {
 	text-align: center;
 }
- #list {
-	 display: inline-block;
-	 margin: 0 auto;
- }
 
- #refresh {
-	 display: inline-block;
+ .upload {
+	 position: relative;
+	 background-image:url('');
+	 background-size:cover;
+	 background-position: center;
+	 height: 480px; width: 640px;
+	 display: block;
 	 margin: 0 auto;
- }
+}

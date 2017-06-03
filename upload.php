@@ -4,7 +4,7 @@ require 'database.class.php';
 $database = new DataBase();
 $image = str_replace(' ', '+', $_POST['image']);
 ?>
-<div class = "div">
+<div class = "upload">
 	<img id = 'image' src = <?php echo $image;?>>
 	<img id = 'overlay' src = 'image/<?php echo $_GET['filter'];?>.png'>
 </div>
