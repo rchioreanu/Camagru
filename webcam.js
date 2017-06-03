@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	var sel = document.getElementById('list');
 	var upload = document.getElementById('uploadbtn');
 	var submit = document.getElementById('submitbtn');
+	var uimage = document.getElementById('uimage');
 
 	function handleSuccess(stream) {
 		var videoTracks = stream.getVideoTracks();
@@ -45,13 +46,39 @@ document.addEventListener("DOMContentLoaded", function () {
 		video.srcObject = stream;
 		hasWebcam = true;
 		overlay.src = "image/dragnea.png";
+		upload.style.display = "none";
+		submit.style.display = "none";
 	}
 	navigator.mediaDevices.getUserMedia(constraints).
 		then(handleSuccess, function () {
 			button.style.display = 'none';
+			upload.onchange = function () {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					var im = new Image();
+					im.src = e.target.result;
+					im.onload = function () {
+						if (im.width != width || im.height != height) {
+							alert ("The image may not look like expected! For best results, please upload 640x480 images");
+						}
+					}
+					uimage.style.backgroundImage = 'url("' + e.target.result + '")';
+					submit.onclick = function () {
+						post('upload.php?filter=' + sel.options[sel.selectedIndex].value, {
+							image: e.target.result
+						});
+					}
+				}
+				if (this.files[0].name.match(/.(jpg|jpeg|png|bmp)$/i)) {
+					reader.readAsDataURL(this.files[0]);
+				}
+				else {
+					alert ("You must choose an image!");
+				}
+			}
 		});
 	sel.onchange = function () {
-			overlay.src = "image/" + sel.options[sel.selectedIndex].value + ".png"
+		overlay.src = "image/" + sel.options[sel.selectedIndex].value + ".png"
 	}
 	button.onclick = function () {
 		if (hasWebcam) {

@@ -29,7 +29,7 @@ header('location: index.php');
 		</div>
 		<button type = "button" id = "button">PHOTO</button>
 		<div class = "center">
-			<button type = "button" class = "line-btn" id = "uploadbtn">Upload!</button>
+			<input type = "file" id = "uploadbtn">
 			<button type = "button" class = "line-btn" id = "submitbtn">Submit!</button>
 		</div>
 		<script type = "text/javascript" src = "webcam.js"></script>

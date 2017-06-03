@@ -16,6 +16,9 @@ $img2 = imagecreatefrompng("image/".$_GET['filter'].".png");
 imagealphablending($img2, true);
 imagealphablending($img, true);
 imagecopy($img, $img2, 0, 0, 0, 0, 640, 480);
+$im = imagecreatetruecolor(640, 480);
+imagealphablending($im, true);
+imagecopy($img, $img2, 0, 0, 0, 0, 640, 480);
 header('Content-Type: image/png');
 imagepng($img, 'image.png');
 ?>
