@@ -1,14 +1,9 @@
 <link rel = "stylesheet" type = "text/css" href = "style.css">
 <?php
 require 'database.class.php';
+$base64Tag = "data:image/png;base64,";
 $database = new DataBase();
 $image = str_replace(' ', '+', $_POST['image']);
-?>
-<div class = "upload">
-	<img id = 'image' src = <?php echo $image;?>>
-	<img id = 'overlay' src = 'image/<?php echo $_GET['filter'];?>.png'>
-</div>
-<?php
 $nobase64 = substr($image, 22);
 $decoded = base64_decode($nobase64);
 $img = imagecreatefromstring($decoded);
@@ -19,6 +14,10 @@ imagecopy($img, $img2, 0, 0, 0, 0, 640, 480);
 $im = imagecreatetruecolor(640, 480);
 imagealphablending($im, true);
 imagecopy($img, $img2, 0, 0, 0, 0, 640, 480);
-header('Content-Type: image/png');
-imagepng($img, 'image.png');
+ob_start();
+imagepng($img);
+$temp = ob_get_clean();
+$ready = base64_encode($temp);
+$database->addImage($ready);
+header("Location: welcome.php");
 ?>
