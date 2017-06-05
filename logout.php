@@ -1,5 +1,4 @@
 <?php
-include 'welcome.php';
-session_destroy();
-header('refresh: 0');
+	session_destroy();
+	header("Location: index.php");
 ?>

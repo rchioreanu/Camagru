@@ -184,6 +184,7 @@ body {
 	background-color: #000;
 	color: #fff;
 	-moz-appearance: none;
+   -webkit-appearance:none;
 	margin-bottom: 5;
 	margin-top: 5;
 }
@@ -240,4 +241,10 @@ body {
 	margin: 10 auto;
 	max-width: 90%;
 	max-height: 100%;
+}
+
+.test {
+	display: block;
+	margin: 0 auto;
+	border-radius: 25px;
 }

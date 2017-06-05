@@ -139,7 +139,7 @@ class DataBase
 		{
 			foreach ($this->db->query($query) as $elem)
 			{
-				echo "<img src = data:image/png;base64,".$elem["img"].">";
+				echo "<img class = 'history' src = 'data:image/png;base64,".$elem["img"]."'>";
 			}
 		}
 		catch (PDOException $e)
