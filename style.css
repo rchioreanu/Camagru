@@ -1,3 +1,6 @@
+body {
+	background-color: #65a0c8;
+}
 .Title {
 	text-align: center;
 }
@@ -40,6 +43,7 @@
 }
 
 #video {
+	border-radius:25px;
 	top: 0;
 	left: 0;
 	z-index: 0;
@@ -55,6 +59,16 @@
 
 #button {
 	display: block;
+	background-color: #000;
+	border-radius: 25px;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
 	margin: 0 auto;
 }
 
@@ -84,12 +98,146 @@
 	text-align: center;
 }
 
- .upload {
-	 position: relative;
-	 background-image:url('');
-	 background-size:cover;
-	 background-position: center;
-	 height: 480px; width: 640px;
-	 display: block;
-	 margin: 0 auto;
+.upload {
+	position: relative;
+	background-image:url('');
+	background-size:cover;
+	background-position: center;
+	height: 480px; width: 640px;
+	display: block;
+	margin: 0 auto;
+}
+
+.header {
+	display: block;
+	margin: 0 auto;
+	width: 100%;
+	height: 15%;
+	background-color: #65a0c8;
+	position: relative;
+}
+
+.buttons {
+	text-align: center;
+	position: relative;
+	width: 100%;
+	border-width: 1px 0 0 0;
+}
+
+#logout-btn {
+	position: absolute;
+	right: 0;
+	background-color: #000;
+	border-radius: 25px;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
+
+#feed-btn {
+	background-color: #000;
+	border-radius: 25px;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
+
+#home-btn {
+	background-color: #000;
+	border-radius: 25px;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
+
+#list {
+	background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+	height: 29px;
+	overflow: hidden;
+	width: 240px;
+	border: none;
+	font-size: 14px;
+	height: 29px;
+	padding: 5px;
+	width: 268px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	background-color: #000;
+	color: #fff;
+	-moz-appearance: none;
+	margin-bottom: 5;
+	margin-top: 5;
+}
+
+#welcome {
+	font-family: Monospace;
+}
+
+#submitbtn {
+	background-color: #000;
+	border-radius: 25px;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
+
+#uploadbtn {
+	background-color: #000;
+	border-radius: 25px;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
+
+#photo-div {
+	float: left;
+	width: 65%;
+}
+
+#feed-div {
+	float: left;
+	width: 30%;
+	height: auto;
+	background-color: #f4d82d;
+	margin-right: 3;
+	border-radius: 25px;
+}
+
+.history {
+	display: block;
+	border-radius: 25px;
+	margin: 10 auto;
+	max-width: 90%;
+	max-height: 100%;
 }

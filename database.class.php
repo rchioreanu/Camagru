@@ -116,5 +116,36 @@ class DataBase
 			$e->getTrace();
 		}
 	}
+
+	public function lastImages()
+	{
+		$query = "SELECT img FROM images ORDER BY id DESC LIMIT 2;";
+		try
+		{
+			foreach ($this->db->query($query) as $elem)
+			{
+				echo "<img class = 'history' src = 'data:image/png;base64,".$elem["img"]."'>";
+			}
+		}
+		catch (PDOException $e)
+		{
+			$e->getTrace();
+		}
+	}
+	public function feed()
+	{
+		$query = "SELECT img FROM images ORDER BY id DESC;";
+		try
+		{
+			foreach ($this->db->query($query) as $elem)
+			{
+				echo "<img src = data:image/png;base64,".$elem["img"].">";
+			}
+		}
+		catch (PDOException $e)
+		{
+			$e->getTrace();
+		}
+	}
 }
 ?>
