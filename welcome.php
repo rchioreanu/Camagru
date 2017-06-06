@@ -1,8 +1,8 @@
 <?php
-require 'database.class.php';
-session_start();
-if (!isset($_SESSION['login_user']))
-	header('location: index.php');
+	require 'database.class.php';
+	session_start();
+	if ($_SESSION['status'] != TRUE || !isset($_SESSION))
+		header('location: index.php');
 ?>
 <html>
 	<head>
