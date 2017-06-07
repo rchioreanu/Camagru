@@ -28,29 +28,20 @@
 			{
 				echo $elem['comment'];
 				echo '<br />';
-				echo $elem['comment'];
-				echo '<br />';
-				echo $elem['comment'];
-				echo '<br />';
-				echo $elem['comment'];
-				echo '<br />';
-				echo $elem['comment'];
-				echo '<br />';
-				echo $elem['comment'];
-				echo '<br />';
 			}
 			echo '</div>';
 		}
 
-		protected function addComment($pid, $uid, $comment)
+		public function addComment($pid, $uid, $comment)
 		{
-			$query = "INSERT INTO comments (comment, user_id, photo_id) VALUES ($comment, $uid, $pid);";
+			$query = "INSERT INTO comments (comment, user_id, photo_id) VALUES ('$comment', '$uid', '$pid');";
 			try
 			{
 				$this->db->query($query);
 			}
 			catch (PDOException $e)
 			{
+				echo "NO";
 				$e->getTrace();
 			}
 		}

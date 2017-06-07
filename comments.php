@@ -2,8 +2,18 @@
 	require 'comments.class.php';
 
 	session_start();
-	var_dump($_SESSION);
-	var_dump($_POST);
+	if ($_SESSION['status'] === FALSE)
+		header("Location: index.php");
+	$uid = $_SESSION['uid'];
+	foreach ($_POST as $key => $value)
+	{
+		if (strpos($key, 'comment') == 0)
+		{
+			$comment = $_POST[$key];
+			$pid = substr($key, 7);
+		}
+	}
 	$db = new Comments();
-
+	$db->addComment($pid, $uid, $comment);
+	header("Location: feed.php");
 ?>
