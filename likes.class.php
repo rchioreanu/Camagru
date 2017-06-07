@@ -2,16 +2,14 @@
 <?php
 	class Likes
 	{
-		private	$user = "root";
-		private	$passwd = "123456";
 		private	$db;
 
 		public function __construct()
 		{
-			$dbName = "mysql:host=localhost;dbname=db_camagru";
 			try
 			{
-				$this->db = new PDO($dbName, $this->user, $this->passwd);
+				require_once 'config/database.php';
+				$this->db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
 			}
 			catch (PDOException $e)
 			{

@@ -90,7 +90,7 @@
 		{
 			$dataBase->addUser($_POST['username'], $_POST['password'], $_POST['FName'],
 				$_POST['LName'], $_POST['email']);
-		header("location: index.php?signup=true");
+			//header("location: index.php?signup=true");
 		}
 	}
 ?>

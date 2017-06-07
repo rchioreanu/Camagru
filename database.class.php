@@ -1,24 +1,33 @@
 <?php
-	require 'comments.class.php';
-	require 'likes.class.php';
+	require_once 'comments.class.php';
+	require_once 'likes.class.php';
+
 
 	class DataBase
 	{
-		private		$user = "root";
-		private		$passwd = "123456";
-		protected	$db;
+		private	$db;
+		private $user;
+		private $passwd;
+		private $data;
 
 		function __construct()
 		{
+			require_once 'config/database.php';
+			$this->data = $DB_DSN;
+			$this->user = $DB_USER;
+			$this->passwd = $DB_PASSWORD;
 			try
 			{
-				$databaseName = "mysql:host=localhost;dbname=db_camagru";
-				$this->db = new PDO($databaseName, $this->user, $this->passwd);
+				$this->db = new PDO('mysql:host=localhost;dbname=ana', 'root', '123456');
+				var_dump($this->data);
+				var_dump($this->user);
+				var_dump($this->passwd);
+				var_dump($this->db);
 			}
 			catch (PDOException $e)
 			{
 				$e->getTrace();
-				die();
+				die("Error");
 			}
 		}
 		public function checkUser($user)
@@ -61,7 +70,16 @@
 		{
 			$tmp = hash("whirlpool", trim($password));
 			$query = "INSERT INTO users (fname, lname, email, uname, passwd) VALUES ('$FName','$LName','$email', '$user','$tmp');";
-			$this->db->query($query);
+			try
+			{
+				$this->db->query($query);
+				var_dump($this->db);
+			}
+			catch (PDOException $e)
+			{
+				echo "Error";
+				$e->getTrace();
+			}
 			$mail = 'You signed up for Camagru!';
 			mail($email, 'Camagru registration', $mail);
 		}
