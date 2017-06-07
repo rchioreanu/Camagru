@@ -7,7 +7,7 @@
 		$status = FALSE;
 	$start = $_GET['start'];
 	if (!isset($_GET['start']))
-		$start = 1;
+		$start = 0;
 ?>
 <!DOCTYPE html>
 

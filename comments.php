@@ -4,7 +4,8 @@
 	session_start();
 	if ($_SESSION['status'] === FALSE)
 		header("Location: index.php");
-	$uid = $_SESSION['uid'];
+	$user = $_SESSION['login_user'];
+	$id = $_SESSION['uid'];
 	foreach ($_POST as $key => $value)
 	{
 		if (strpos($key, 'comment') == 0)
@@ -14,6 +15,6 @@
 		}
 	}
 	$db = new Comments();
-	$db->addComment($pid, $uid, $comment);
+	$db->addComment($pid, $user, $comment);
 	header("Location: feed.php");
 ?>

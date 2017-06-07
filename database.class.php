@@ -1,5 +1,7 @@
 <?php
-	include 'comments.class.php';
+	require 'comments.class.php';
+	require 'likes.class.php';
+
 	class DataBase
 	{
 		private		$user = "root";
@@ -90,9 +92,9 @@
 			}
 			return (FALSE);
 		}
-		public function	addImage($img)
+		public function	addImage($uid, $img)
 		{
-			$query = "INSERT INTO images (img) VALUES ('$img');";
+			$query = "INSERT INTO images (uid, img) VALUES ('$uid', '$img');";
 			try
 			{
 				$this->db->query($query);
@@ -134,19 +136,30 @@
 				$e->getTrace();
 			}
 		}
+
 		public function feed($start, $status)
 		{
 			$query = "SELECT * FROM images ORDER BY id DESC LIMIT 5 OFFSET $start;";
+			session_start();
+			$user = $_SESSION['login_user'];
+			$user_id = $_SESSION['uid'];
 			try
 			{
 				$tmp = 0;
 				foreach ($this->db->query($query) as $elem)
 				{
 					$id = $elem['id'];
+					$uid = $elem['uid'];
+					if ($uid == $user_id)
+						$isAuthor = TRUE;
+					$author = $elem['uid'];
 					echo '<div class = "feed">';
 					echo "<img class = 'history' src = 'data:image/png;base64,".$elem["img"]."'>";
 					$comments = new Comments();
 					$comments->getComments($id);
+					$likes = new Likes();
+					$likesNr = $likes->getLikes($id);
+					$isLiked = $likes->checkLike($user, $id);
 					if ($status === TRUE)
 					{
 						echo '<form action = "comments.php"
@@ -154,7 +167,13 @@
 							<textarea name = "comment'.$id.'"></textarea>
 							</form>';
 						echo '<input type = "submit" value = "Comment" id = "com'.$id.'" class = "comment-btn" form = "comments'.$id.'" />';
-						echo '<button class = "like-btn" id = "like-btn'.$id.'" type = "button">Like</button>';
+						if ($isLiked === FALSE)
+							echo '<a href = "like.php?user='.$user.'&id='.$id.'"><button  class = "like-btn" id = "like-btn'.$id.'" type = "button">Like</button></a>';
+						else
+							echo '<a href = "unlike.php?user='.$user.'&id='.$id.'"><button  class = "like-btn" id = "like-btn'.$id.'" type = "button">Unlike</button></a>';
+						if ($isAuthor)
+							echo '<a href = "delete.php?id='.$id.'&user='.$uid.'"><button  class = "del-btn" id = "del-btn'.$id.'" type = "button">Delete</button></a>';
+						echo "Likes: ".$likesNr;
 					}
 					echo '</div>';
 					echo '<br />';
@@ -162,6 +181,19 @@
 				}
 				if ($tmp == 0)
 					header("Location: feed.php");
+			}
+			catch (PDOException $e)
+			{
+				$e->getTrace();
+			}
+		}
+
+		public function deleteImage($id)
+		{
+			$query = "DELETE FROM images WHERE id LIKE $id;";
+			try
+			{
+				$this->db->query($query);
 			}
 			catch (PDOException $e)
 			{
