@@ -18,15 +18,11 @@
 			$this->passwd = $DB_PASSWORD;
 			try
 			{
-				$this->db = new PDO('mysql:host=localhost;dbname=ana', 'root', '123456');
-				var_dump($this->data);
-				var_dump($this->user);
-				var_dump($this->passwd);
-				var_dump($this->db);
+				$this->db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
 			}
 			catch (PDOException $e)
 			{
-				$e->getTrace();
+				echo $e->getMessage();
 				die("Error");
 			}
 		}
@@ -73,12 +69,11 @@
 			try
 			{
 				$this->db->query($query);
-				var_dump($this->db);
 			}
 			catch (PDOException $e)
 			{
-				echo "Error";
-				$e->getTrace();
+				echo "Error: ";
+				echo $e->getMessage();
 			}
 			$mail = 'You signed up for Camagru!';
 			mail($email, 'Camagru registration', $mail);
@@ -164,11 +159,20 @@
 			try
 			{
 				$tmp = 0;
+				$d = $this->db->prepare($query);
+				$d->execute();
+				if ($d->rowCount() == 0)
+				{
+					echo "<h1 class = 'Title'>THERE ARE NO PICTURES TO BE SHOWN :(</h1>";
+					die();
+				}
 				foreach ($this->db->query($query) as $elem)
 				{
 					$id = $elem['id'];
 					$uid = $elem['uid'];
-					if ($uid == $user_id)
+					if ($uid !== $user_id)
+						$isAuthor = FALSE;
+					else
 						$isAuthor = TRUE;
 					$author = $elem['uid'];
 					echo '<div class = "feed">';
@@ -202,7 +206,7 @@
 			}
 			catch (PDOException $e)
 			{
-				$e->getTrace();
+				echo $e->getMessage();
 			}
 		}
 

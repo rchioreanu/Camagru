@@ -6,7 +6,7 @@
 
 		public function __construct()
 		{
-			require_once 'config/database.php';
+			require 'config/database.php';
 			try
 			{
 				$this->db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
